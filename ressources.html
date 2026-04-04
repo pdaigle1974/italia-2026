@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ressources — Italia 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --terracotta: #C1440E;
+      --terracotta-light: #E8622A;
+      --gold: #C9963A;
+      --gold-light: #E8B86D;
+      --cream: #FAF6EF;
+      --cream-dark: #F0E8D8;
+      --dark: #1A1208;
+      --dark-mid: #2E2010;
+      --text: #3A2A10;
+      --text-light: #7A6040;
+      --white: #FFFFFF;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Jost', sans-serif;
+      --shadow: 0 4px 24px rgba(26,18,8,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(26,18,8,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,150,58,0.2);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(250,246,239,0.7);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
+
+    /* ── En-tête ── */
+    .page-header {
+      margin-top: 68px;
+      background: var(--dark);
+      padding: 3rem 3rem 2rem;
+      border-bottom: 1px solid rgba(201,150,58,0.15);
+    }
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+    }
+    .page-header h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 0.8rem;
+    }
+    .page-header p {
+      color: rgba(250,246,239,0.6);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      margin-top: 0.8rem;
+    }
+
+    /* ── Contenu ── */
+    .main-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── Section titre ── */
+    .section-titre {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--dark);
+      margin: 3rem 0 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--cream-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-titre:first-child { margin-top: 0; }
+
+    /* ── Grille de liens ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ── Carte de lien ── */
+    .link-card {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 1.2rem 1.4rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      border-left: 4px solid var(--cream-dark);
+      transition: box-shadow 0.2s, border-left-color 0.2s, transform 0.15s;
+    }
+    .link-card:hover {
+      box-shadow: 0 6px 32px rgba(26,18,8,0.14);
+      border-left-color: var(--terracotta);
+      transform: translateY(-2px);
+    }
+    .link-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .link-body {}
+    .link-titre {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .link-desc {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+    .link-url {
+      font-size: 0.7rem;
+      color: var(--terracotta);
+      margin-top: 0.3rem;
+      display: block;
+      word-break: break-all;
+    }
+
+    /* ── Alerte grève ── */
+    .alerte {
+      background: rgba(201,150,58,0.08);
+      border: 1px solid rgba(201,150,58,0.3);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+    .alerte strong { color: #7a5c00; }
+
+    /* ── Note consulaire ── */
+    .note-consulaire {
+      background: rgba(193,68,14,0.06);
+      border: 1px solid rgba(193,68,14,0.15);
+      border-left: 4px solid var(--terracotta);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+    .note-consulaire strong { color: var(--terracotta); }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1rem; }
+      .page-header { padding: 2rem 1.2rem 1.5rem; }
+      .main-content { padding: 2rem 1rem 3rem; }
+      .links-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-logo">🇮🇹 Italia</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="itineraire.html">Itinéraire</a></li>
+      <li><a href="carte.html">Carte</a></li>
+      <li><a href="checklist.html">Bagages</a></li>
+      <li><a href="reservations.html">Réservations</a></li>
+      <li><a href="ressources.html" class="active">Ressources</a></li>
+    </ul>
+  </nav>
+
+  <!-- En-tête -->
+  <div class="page-header">
+    <h1>Ressources</h1>
+    <p>Liens utiles pour préparer et vivre le voyage</p>
+  </div>
+
+  <div class="main-content">
+
+    <!-- ══════════════════════════════
+         GOUVERNEMENT CANADIEN
+    ══════════════════════════════ -->
+    <h2 class="section-titre">🍁 Gouvernement du Canada</h2>
+
+    <div class="links-grid">
+
+      <a class="link-card" href="https://voyage.gc.ca/destinations/italie" target="_blank">
+        <div class="link-icon">📋</div>
+        <div class="link-body">
+          <div class="link-titre">Conseils aux voyageurs — Italie</div>
+          <div class="link-desc">Avertissements officiels, exigences d'entrée, santé et sécurité pour l'Italie.</div>
+          <span class="link-url">voyage.gc.ca</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://voyage.gc.ca/" target="_blank">
+        <div class="link-icon">🌐</div>
+        <div class="link-body">
+          <div class="link-titre">Voyage.gc.ca</div>
+          <div class="link-desc">Portail officiel de voyage du gouvernement canadien — documents, passeports, inscriptions.</div>
+          <span class="link-url">voyage.gc.ca</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://voyage.gc.ca/assistance/ambassades-consulats/italie" target="_blank">
+        <div class="link-icon">🏛️</div>
+        <div class="link-body">
+          <div class="link-titre">Ambassades et consulats canadiens en Italie</div>
+          <div class="link-desc">Liste complète des représentations canadiennes en Italie avec coordonnées.</div>
+          <span class="link-url">voyage.gc.ca</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ══════════════════════════════
+         AMBASSADES & CONSULATS
+    ══════════════════════════════ -->
+    <h2 class="section-titre">🏛️ Ambassades & Consulats canadiens</h2>
+
+    <div class="note-consulaire">
+      <strong>Important :</strong> L'ambassade principale est à Rome. Le consulat de Milan couvre le nord de l'Italie (Vénétie inclut Venise). Pour la Sicile (Palerme, Catane) et Naples, c'est l'ambassade de Rome qui est compétente. L'aide d'urgence est disponible 24h/24.
+    </div>
+
+    <div class="links-grid">
+
+      <a class="link-card" href="https://www.canadainternational.gc.ca/italy-italie/offices-bureaux/embassy-ambassade.aspx?lang=fra" target="_blank">
+        <div class="link-icon">🇨🇦</div>
+        <div class="link-body">
+          <div class="link-titre">Ambassade du Canada — Rome</div>
+          <div class="link-desc">Via Zara, 30 · Rome. Compétente pour Rome, Naples, Palerme, Catane et toute l'Italie centrale et méridionale.</div>
+          <span class="link-url">canadainternational.gc.ca</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.canadainternational.gc.ca/italy-italie/contact-contactez.aspx?lang=fra" target="_blank">
+        <div class="link-icon">📞</div>
+        <div class="link-body">
+          <div class="link-titre">Consulat du Canada — Milan</div>
+          <div class="link-desc">Piazza Cavour 3, Milan. Couvre la Lombardie, Vénétie (Venise) et le nord de l'Italie. Lun–ven 9h–13h.</div>
+          <span class="link-url">canadainternational.gc.ca</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ══════════════════════════════
+         TRAINS
+    ══════════════════════════════ -->
+    <h2 class="section-titre">🚆 Compagnies de train</h2>
+
+    <div class="alerte">
+      <strong>⚠️ Grèves en Italie :</strong> Les grèves ferroviaires sont fréquentes en Italie. En cas de grève, des services minimums sont garantis de 7h à 10h et de 18h à 21h. Vérifiez toujours l'état du trafic avant de vous déplacer sur le site de Trenitalia ou Italo.
+    </div>
+
+    <div class="links-grid">
+
+      <a class="link-card" href="https://www.trenitalia.com" target="_blank">
+        <div class="link-icon">🚄</div>
+        <div class="link-body">
+          <div class="link-titre">Trenitalia</div>
+          <div class="link-desc">Compagnie nationale italienne. Frecciarossa (TGV), Intercity et trains régionaux. Réservations et horaires.</div>
+          <span class="link-url">trenitalia.com</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.italotreno.it" target="_blank">
+        <div class="link-icon">🚅</div>
+        <div class="link-body">
+          <div class="link-titre">Italo Treno</div>
+          <div class="link-desc">Compagnie privée à grande vitesse. Alternative à Trenitalia sur les axes Rome–Florence–Naples. Souvent moins affecté par les grèves.</div>
+          <span class="link-url">italotreno.it</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="http://www.viaggiatreno.it" target="_blank">
+        <div class="link-icon">📡</div>
+        <div class="link-body">
+          <div class="link-titre">ViaggiaTreno — État du trafic</div>
+          <div class="link-desc">Suivi en temps réel des trains Trenitalia. Indispensable en cas de doute sur retards ou annulations.</div>
+          <span class="link-url">viaggiatreno.it</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.trainline.eu/fr" target="_blank">
+        <div class="link-icon">🎫</div>
+        <div class="link-body">
+          <div class="link-titre">Trainline</div>
+          <div class="link-desc">Agrégateur pratique pour comparer et réserver Trenitalia et Italo en un seul endroit, en français.</div>
+          <span class="link-url">trainline.eu</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ══════════════════════════════
+         GOUVERNEMENT ITALIEN
+    ══════════════════════════════ -->
+    <h2 class="section-titre">🇮🇹 Gouvernement italien</h2>
+
+    <div class="links-grid">
+
+      <a class="link-card" href="https://www.esteri.it/en/" target="_blank">
+        <div class="link-icon">🏛️</div>
+        <div class="link-body">
+          <div class="link-titre">Ministère des Affaires étrangères — Italie</div>
+          <div class="link-desc">Informations officielles sur les exigences d'entrée, visas et formalités pour l'Italie.</div>
+          <span class="link-url">esteri.it</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.salute.gov.it/portale/nuovocoronavirus/homeNuovoCoronavirus.jsp" target="_blank">
+        <div class="link-icon">🏥</div>
+        <div class="link-body">
+          <div class="link-titre">Ministère de la Santé — Italie</div>
+          <div class="link-desc">Informations sanitaires officielles pour les voyageurs, exigences de santé à l'entrée.</div>
+          <span class="link-url">salute.gov.it</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.enit.it" target="_blank">
+        <div class="link-icon">🌍</div>
+        <div class="link-body">
+          <div class="link-titre">ENIT — Tourisme Italie (officiel)</div>
+          <div class="link-desc">Office national italien du tourisme. Ressources et informations pratiques pour visiter l'Italie.</div>
+          <span class="link-url">enit.it</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ══════════════════════════════
+         TOURISME PAR VILLE
+    ══════════════════════════════ -->
+    <h2 class="section-titre">🏙️ Tourisme par ville</h2>
+
+    <div class="links-grid">
+
+      <a class="link-card" href="https://www.turismoroma.it/fr" target="_blank">
+        <div class="link-icon">🏛️</div>
+        <div class="link-body">
+          <div class="link-titre">Rome — Turismo Roma (officiel)</div>
+          <div class="link-desc">Site officiel du tourisme de la Ville de Rome. Événements, itinéraires, musées, transports. Disponible en français.</div>
+          <span class="link-url">turismoroma.it</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.visitflorence.com/fr/" target="_blank">
+        <div class="link-icon">🌿</div>
+        <div class="link-body">
+          <div class="link-titre">Florence — Visit Florence</div>
+          <div class="link-desc">Guide officiel de Florence. Galerie des Offices, Duomo, Ponte Vecchio, activités et agenda culturel.</div>
+          <span class="link-url">visitflorence.com</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.veneziaunica.it/fr" target="_blank">
+        <div class="link-icon">🚣</div>
+        <div class="link-body">
+          <div class="link-titre">Venise — Venezia Unica (officiel)</div>
+          <div class="link-desc">Plateforme officielle de Venise. Pass touristiques, vaporettos, musées, réservations. En français.</div>
+          <span class="link-url">veneziaunica.it</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.naples.fr" target="_blank">
+        <div class="link-icon">🍕</div>
+        <div class="link-body">
+          <div class="link-titre">Naples — Guide touristique</div>
+          <div class="link-desc">Infos pratiques sur Naples : sites, musées, Pompéi, Côte Amalfitaine, restauration.</div>
+          <span class="link-url">naples.fr</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.palermotourism.com" target="_blank">
+        <div class="link-icon">🌊</div>
+        <div class="link-body">
+          <div class="link-titre">Palerme — Palermo Tourism</div>
+          <div class="link-desc">Portail touristique de Palerme. Sites historiques, culture arabo-normande, gastronomie sicilienne.</div>
+          <span class="link-url">palermotourism.com</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.turismo.catania.it" target="_blank">
+        <div class="link-icon">🌋</div>
+        <div class="link-body">
+          <div class="link-titre">Catane — Turismo Catania</div>
+          <div class="link-desc">Tourisme officiel de Catane. Etna, baroque sicilien, Taormine, plages et activités.</div>
+          <span class="link-url">turismo.catania.it</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.visitsicily.info/fr/" target="_blank">
+        <div class="link-icon">🏝️</div>
+        <div class="link-body">
+          <div class="link-titre">Sicile — Visit Sicily (officiel)</div>
+          <div class="link-desc">Site officiel du tourisme sicilien. Itinéraires, culture, nature, gastronomie. En français.</div>
+          <span class="link-url">visitsicily.info</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.firenzeturismo.it/fr/" target="_blank">
+        <div class="link-icon">🎨</div>
+        <div class="link-body">
+          <div class="link-titre">Toscane — Firenze Turismo (officiel)</div>
+          <div class="link-desc">Portail touristique officiel de la région Toscane et de Florence. En français.</div>
+          <span class="link-url">firenzeturismo.it</span>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <p>Italia 2026 · Pascal, Marie-Eve, Suzie &amp; Patrick</p>
+  </footer>
+
+</body>
+</html>
