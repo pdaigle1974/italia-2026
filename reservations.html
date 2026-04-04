@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réservations — Italia 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --terracotta: #C1440E;
+      --terracotta-light: #E8622A;
+      --gold: #C9963A;
+      --gold-light: #E8B86D;
+      --cream: #FAF6EF;
+      --cream-dark: #F0E8D8;
+      --dark: #1A1208;
+      --dark-mid: #2E2010;
+      --text: #3A2A10;
+      --text-light: #7A6040;
+      --white: #FFFFFF;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Jost', sans-serif;
+      --shadow: 0 4px 24px rgba(26,18,8,0.10);
+      --color-groupe: #C1440E;
+      --color-pascal: #E8622A;
+      --color-suzie: #C9963A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(26,18,8,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,150,58,0.2);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(250,246,239,0.7);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
+
+    /* ── En-tête ── */
+    .page-header {
+      margin-top: 68px;
+      background: var(--dark);
+      padding: 3rem 3rem 2rem;
+      border-bottom: 1px solid rgba(201,150,58,0.15);
+    }
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+    }
+    .page-header h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 0.8rem;
+    }
+    .page-header p {
+      color: rgba(250,246,239,0.6);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      margin-top: 0.8rem;
+    }
+
+    /* ── Résumé statuts ── */
+    .statuts-bar {
+      background: var(--dark-mid);
+      padding: 1rem 3rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(201,150,58,0.1);
+    }
+    .statut-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: rgba(250,246,239,0.7);
+    }
+    .statut-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .dot-confirme { background: #4caf50; }
+    .dot-attente  { background: var(--gold); }
+    .dot-reserver { background: #e57373; }
+
+    /* ── Contenu principal ── */
+    .main-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    /* ── Section titre ── */
+    .section-titre {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--dark);
+      margin: 2.5rem 0 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--cream-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-titre:first-child { margin-top: 0; }
+
+    /* ── Carte de réservation ── */
+    .resa-card {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border-left: 4px solid var(--cream-dark);
+      transition: box-shadow 0.2s;
+    }
+    .resa-card:hover { box-shadow: 0 6px 32px rgba(26,18,8,0.13); }
+    .resa-card.confirme { border-left-color: #4caf50; }
+    .resa-card.attente  { border-left-color: var(--gold); }
+    .resa-card.reserver { border-left-color: #e57373; }
+
+    .resa-body {
+      padding: 1.1rem 1.4rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.4rem 1rem;
+      align-items: start;
+    }
+    .resa-titre {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      grid-column: 1;
+    }
+    .resa-badge {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
+    }
+    .resa-detail {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      grid-column: 1;
+    }
+    .resa-meta {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-style: italic;
+      grid-column: 1;
+      margin-top: 0.1rem;
+    }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .badge-confirme { background: rgba(76,175,80,0.12); color: #2e7d32; border: 1px solid rgba(76,175,80,0.25); }
+    .badge-attente  { background: rgba(201,150,58,0.12); color: #7a5c00; border: 1px solid rgba(201,150,58,0.3); }
+    .badge-reserver { background: rgba(229,115,115,0.12); color: #b71c1c; border: 1px solid rgba(229,115,115,0.25); }
+    .badge-groupe   { background: rgba(193,68,14,0.10); color: var(--terracotta); border: 1px solid rgba(193,68,14,0.2); }
+    .badge-pascal   { background: rgba(232,98,42,0.10); color: #b84010; border: 1px solid rgba(232,98,42,0.2); }
+    .badge-suzie    { background: rgba(201,150,58,0.12); color: #7a5c00; border: 1px solid rgba(201,150,58,0.3); }
+
+    /* ── Tags participants ── */
+    .tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+      grid-column: 1;
+    }
+
+    /* ── Lien ── */
+    .resa-lien {
+      font-size: 0.75rem;
+      color: var(--terracotta);
+      text-decoration: none;
+      grid-column: 1;
+      margin-top: 0.2rem;
+    }
+    .resa-lien:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 1rem 1.2rem; }
+      .page-header { padding: 2rem 1.2rem 1.5rem; }
+      .statuts-bar { padding: 1rem 1.2rem; gap: 1rem; }
+      .main-content { padding: 2rem 1rem 3rem; }
+      .resa-body { grid-template-columns: 1fr; }
+      .resa-badge { grid-column: 1; grid-row: auto; margin-top: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-logo">🇮🇹 Italia</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="itineraire.html">Itinéraire</a></li>
+      <li><a href="carte.html">Carte</a></li>
+      <li><a href="checklist.html">Bagages</a></li>
+      <li><a href="reservations.html" class="active">Réservations</a></li>
+      <li><a href="#">Budget</a></li>
+    </ul>
+  </nav>
+
+  <!-- En-tête -->
+  <div class="page-header">
+    <h1>Réservations</h1>
+    <p>Italia 2026 · 5 – 19 septembre</p>
+  </div>
+
+  <!-- Barre de statuts -->
+  <div class="statuts-bar">
+    <div class="statut-item"><div class="statut-dot dot-confirme"></div> Confirmé / Payé</div>
+    <div class="statut-item"><div class="statut-dot dot-attente"></div> À confirmer</div>
+    <div class="statut-item"><div class="statut-dot dot-reserver"></div> À réserver</div>
+  </div>
+
+  <div class="main-content">
+
+    <!-- ══════════════════════════════
+         TRANSPORT
+    ══════════════════════════════ -->
+    <h2 class="section-titre">✈️ Transport</h2>
+
+    <!-- Vol aller -->
+    <div class="resa-card confirme">
+      <div class="resa-body">
+        <div class="resa-titre">Vol aller — Montréal (YUL) → Rome (FCO)</div>
+        <div class="resa-badge"><span class="badge badge-confirme">✓ Confirmé</span></div>
+        <div class="resa-detail">TS 402 · 5 septembre · Départ 20:25 → Arrivée 6 sept 10:25</div>
+        <div class="resa-meta">Air Transat · Durée 8h00</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+    <!-- Vol retour -->
+    <div class="resa-card confirme">
+      <div class="resa-body">
+        <div class="resa-titre">Vol retour — Rome (FCO) → Montréal (YUL)</div>
+        <div class="resa-badge"><span class="badge badge-confirme">✓ Confirmé</span></div>
+        <div class="resa-detail">TS 403 · 19 septembre · Départ 12:15 → Arrivée 15:20</div>
+        <div class="resa-meta">Air Transat · Durée 9h15</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+    <!-- Rome → Palerme -->
+    <div class="resa-card confirme">
+      <div class="resa-body">
+        <div class="resa-titre">Vol Rome (FCO) → Palerme (PMO)</div>
+        <div class="resa-badge"><span class="badge badge-confirme">✓ Confirmé</span></div>
+        <div class="resa-detail">FR 4906 · 8 septembre · Départ 11:15 → Arrivée 12:20</div>
+        <div class="tags"><span class="badge badge-pascal">Pascal &amp; Marie-Eve</span></div>
+      </div>
+    </div>
+
+    <!-- Rome → Florence -->
+    <div class="resa-card attente">
+      <div class="resa-body">
+        <div class="resa-titre">Rome → Florence (TGV)</div>
+        <div class="resa-badge"><span class="badge badge-attente">À confirmer</span></div>
+        <div class="resa-detail">8 septembre</div>
+        <div class="tags"><span class="badge badge-suzie">Suzie &amp; Patrick</span></div>
+      </div>
+    </div>
+
+    <!-- Florence → Venise -->
+    <div class="resa-card attente">
+      <div class="resa-body">
+        <div class="resa-titre">Florence → Venise (TGV)</div>
+        <div class="resa-badge"><span class="badge badge-attente">À confirmer</span></div>
+        <div class="tags"><span class="badge badge-suzie">Suzie &amp; Patrick</span></div>
+      </div>
+    </div>
+
+    <!-- Palerme → Catane -->
+    <div class="resa-card reserver">
+      <div class="resa-body">
+        <div class="resa-titre">Palerme → Catane (train ou bus)</div>
+        <div class="resa-badge"><span class="badge badge-reserver">À réserver</span></div>
+        <div class="resa-detail">12 septembre</div>
+        <div class="tags"><span class="badge badge-pascal">Pascal &amp; Marie-Eve</span></div>
+      </div>
+    </div>
+
+    <!-- Venise → Catane -->
+    <div class="resa-card attente">
+      <div class="resa-body">
+        <div class="resa-titre">Venise → Catane (vol Wizz Air)</div>
+        <div class="resa-badge"><span class="badge badge-attente">À confirmer</span></div>
+        <div class="resa-detail">12 septembre</div>
+        <div class="tags"><span class="badge badge-suzie">Suzie &amp; Patrick</span></div>
+      </div>
+    </div>
+
+    <!-- Catane → Naples -->
+    <div class="resa-card attente">
+      <div class="resa-body">
+        <div class="resa-titre">Catane → Naples (vol)</div>
+        <div class="resa-badge"><span class="badge badge-attente">À confirmer</span></div>
+        <div class="resa-detail">15 septembre</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+    <!-- Naples → Rome -->
+    <div class="resa-card reserver">
+      <div class="resa-body">
+        <div class="resa-titre">Naples → Rome (TGV)</div>
+        <div class="resa-badge"><span class="badge badge-reserver">À réserver</span></div>
+        <div class="resa-detail">19 septembre · Avant le vol de 12:15</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         HÉBERGEMENT
+    ══════════════════════════════ -->
+    <h2 class="section-titre">🏨 Hébergement</h2>
+
+    <!-- Rome aller -->
+    <div class="resa-card attente">
+      <div class="resa-body">
+        <div class="resa-titre">Rome — Monti49 Guesthouse</div>
+        <div class="resa-badge"><span class="badge badge-attente">À confirmer</span></div>
+        <div class="resa-detail">Via Palermo 49, Monti</div>
+        <div class="resa-meta">5 – 8 septembre · Nuits 1 et 2</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+    <!-- Palerme -->
+    <div class="resa-card attente">
+      <div class="resa-body">
+        <div class="resa-titre">Palerme — Appartement</div>
+        <div class="resa-badge"><span class="badge badge-attente">À confirmer</span></div>
+        <div class="resa-detail">Via Porta Carini, 60</div>
+        <div class="resa-meta">8 – 12 septembre · Nuits 3 à 6</div>
+        <div class="tags"><span class="badge badge-pascal">Pascal &amp; Marie-Eve</span></div>
+      </div>
+    </div>
+
+    <!-- Florence -->
+    <div class="resa-card attente">
+      <div class="resa-body">
+        <div class="resa-titre">Florence — Hébergement</div>
+        <div class="resa-badge"><span class="badge badge-attente">À confirmer</span></div>
+        <div class="resa-detail">Via Santa Catarina d'Alessandria 15</div>
+        <div class="resa-meta">Arrivée 15h · Départ 10h · Petit déjeuner non inclus</div>
+        <div class="tags"><span class="badge badge-suzie">Suzie &amp; Patrick</span></div>
+      </div>
+    </div>
+
+    <!-- Venise -->
+    <div class="resa-card attente">
+      <div class="resa-body">
+        <div class="resa-titre">Venise — Hébergement</div>
+        <div class="resa-badge"><span class="badge badge-attente">À confirmer</span></div>
+        <div class="resa-detail">Campiello Tron 1880, Dorsoduro</div>
+        <div class="resa-meta">Arrivée 15h · Départ 10h · Petit déjeuner non inclus</div>
+        <div class="tags"><span class="badge badge-suzie">Suzie &amp; Patrick</span></div>
+      </div>
+    </div>
+
+    <!-- Catane -->
+    <div class="resa-card reserver">
+      <div class="resa-body">
+        <div class="resa-titre">Catane — Appartement (à choisir)</div>
+        <div class="resa-badge"><span class="badge badge-reserver">À réserver</span></div>
+        <div class="resa-detail">Option 1 : 31 Via San Giuseppe Al Duomo</div>
+        <div class="resa-meta">Option 2 : Via S.Maria la Stalla, 111</div>
+        <div class="resa-meta">12 – 15 septembre · Nuits 7 à 10</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+    <!-- Naples -->
+    <div class="resa-card confirme">
+      <div class="resa-body">
+        <div class="resa-titre">Naples — Appartement</div>
+        <div class="resa-badge"><span class="badge badge-confirme">✓ Payé</span></div>
+        <div class="resa-detail">Piazza San Gaetano, 81</div>
+        <div class="resa-meta">15 – 19 septembre · Nuits 10 à 13</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+    <!-- Rome retour -->
+    <div class="resa-card attente">
+      <div class="resa-body">
+        <div class="resa-titre">Rome — Domus Giulio Guest House</div>
+        <div class="resa-badge"><span class="badge badge-attente">À confirmer</span></div>
+        <div class="resa-meta">19 septembre (nuit avant le vol retour)</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         ACTIVITÉS
+    ══════════════════════════════ -->
+    <h2 class="section-titre">🎟️ Activités</h2>
+
+    <!-- Colisée -->
+    <div class="resa-card confirme">
+      <div class="resa-body">
+        <div class="resa-titre">Colisée &amp; Forum Romain — Rome</div>
+        <div class="resa-badge"><span class="badge badge-confirme">✓ Payé GYG</span></div>
+        <div class="resa-detail">7 septembre</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+    <!-- Etna -->
+    <div class="resa-card confirme">
+      <div class="resa-body">
+        <div class="resa-titre">Excursion Etna — téléphérique &amp; 4x4 jusqu'à 3 340 m</div>
+        <div class="resa-badge"><span class="badge badge-confirme">✓ Réservé GYG</span></div>
+        <div class="resa-detail">13 septembre · Départ 7:30</div>
+        <div class="resa-meta">Prévoir vêtements chauds — température fraîche en altitude</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+        <a class="resa-lien" href="https://www.getyourguide.com/nicolosi-l115237/excursion-sur-l-etna-au-depart-de-catane-avec-telepherique-et-4x4-jusqu-a-3340-metres-t454024/" target="_blank">→ Voir sur GetYourGuide</a>
+      </div>
+    </div>
+
+    <!-- Amalfi -->
+    <div class="resa-card confirme">
+      <div class="resa-body">
+        <div class="resa-titre">Croisière — Côte Amalfitaine, Positano &amp; Salerne</div>
+        <div class="resa-badge"><span class="badge badge-confirme">✓ Payé GYG</span></div>
+        <div class="resa-detail">16 septembre · Départ 8:00 · Départ de Naples en bateau</div>
+        <div class="resa-meta">176,35 $ / personne</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+        <a class="resa-lien" href="https://www.getyourguide.com/naples-l162/au-depart-de-naples-salerne-positano-et-la-cote-amalfitaine-en-bateau-t870296/" target="_blank">→ Voir sur GetYourGuide</a>
+      </div>
+    </div>
+
+    <!-- Pompéi -->
+    <div class="resa-card confirme">
+      <div class="resa-body">
+        <div class="resa-titre">Visite guidée de Pompéi — petit groupe depuis Naples</div>
+        <div class="resa-badge"><span class="badge badge-confirme">✓ Réservé GYG</span></div>
+        <div class="resa-detail">17 septembre · Départ 8:30 · Départ de Naples</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+        <a class="resa-lien" href="https://www.getyourguide.com/naples-l162/visite-guidee-de-pompei-depuis-naples-en-petit-groupe-t442514/" target="_blank">→ Voir sur GetYourGuide</a>
+      </div>
+    </div>
+
+    <!-- Vatican -->
+    <div class="resa-card reserver">
+      <div class="resa-body">
+        <div class="resa-titre">Vatican &amp; Chapelle Sixtine — Rome</div>
+        <div class="resa-badge"><span class="badge badge-reserver">À réserver</span></div>
+        <div class="resa-detail">7 septembre</div>
+        <div class="tags"><span class="badge badge-groupe">À 4</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <p>Italia 2026 · Pascal, Marie-Eve, Suzie &amp; Patrick</p>
+  </footer>
+
+</body>
+</html>

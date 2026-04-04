@@ -423,7 +423,7 @@
       <li><a href="itineraire.html">Itinéraire</a></li>
       <li><a href="carte.html">Carte</a></li>
       <li><a href="checklist.html" class="active">Bagages</a></li>
-      <li><a href="#">Réservations</a></li>
+      <li><a href="reservations.html">Réservations</a></li>
       <li><a href="#">Budget</a></li>
     </ul>
   </nav>
@@ -446,8 +446,7 @@
 
   <!-- Onglets voyageurs -->
   <div class="voyageur-tabs">
-    <button class="tab-btn active" onclick="switchTab('groupe')">🧳 À 4</button>
-    <button class="tab-btn" onclick="switchTab('pascal')">Pascal &amp; Marie-Eve</button>
+    <button class="tab-btn active" onclick="switchTab('pascal')">Pascal &amp; Marie-Eve</button>
     <button class="tab-btn" onclick="switchTab('suzie')">Suzie &amp; Patrick</button>
   </div>
 
@@ -457,22 +456,25 @@
     <!-- ══════════════════════════════════════
          ONGLET : TOUT LE GROUPE
     ══════════════════════════════════════ -->
-    <div class="voyageur-panel active" id="panel-groupe">
+    <!-- ══════════════════════════════════════
+         ONGLET : PASCAL & Marie-Eve
+    ══════════════════════════════════════ -->
+    <div class="voyageur-panel active" id="panel-pascal">
       <div class="voyageur-header">
-        <span class="voyageur-avatar">👨‍👩‍👧‍👦</span>
+        <span class="voyageur-avatar">🌊</span>
         <div class="voyageur-info">
-          <h2>Tout le groupe</h2>
-          <p>Items communs à tous les voyageurs</p>
+          <h2>Pascal &amp; Marie-Eve</h2>
+          <p>Rome · Palerme · Sicile · Catane</p>
         </div>
         <div class="mini-prog">
-          <div class="mini-prog-count" id="count-groupe">0/0</div>
+          <div class="mini-prog-count" id="count-pascal">0/0</div>
           <div class="mini-prog-label">items cochés</div>
         </div>
       </div>
 
-      <div class="categories" id="cats-groupe">
+      <div class="categories" id="cats-pascal">
 
-        <div class="categorie open" data-cat="groupe-docs">
+        <div class="categorie" data-cat="pascal-docs">
           <div class="categorie-header" onclick="toggleCat(this)">
             <div class="categorie-titre">
               <span class="categorie-icon">📄</span>
@@ -496,7 +498,7 @@
           </div>
         </div>
 
-        <div class="categorie" data-cat="groupe-elec">
+        <div class="categorie" data-cat="pascal-elec">
           <div class="categorie-header" onclick="toggleCat(this)">
             <div class="categorie-titre">
               <span class="categorie-icon">🔌</span>
@@ -519,7 +521,7 @@
           </div>
         </div>
 
-        <div class="categorie" data-cat="groupe-pratique">
+        <div class="categorie" data-cat="pascal-pratique">
           <div class="categorie-header" onclick="toggleCat(this)">
             <div class="categorie-titre">
               <span class="categorie-icon">🎒</span>
@@ -542,27 +544,6 @@
             <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Masque de nuit &amp; bouchons d'oreilles</span></div>
           </div>
         </div>
-
-      </div>
-    </div>
-
-    <!-- ══════════════════════════════════════
-         ONGLET : PASCAL & Marie-Eve
-    ══════════════════════════════════════ -->
-    <div class="voyageur-panel" id="panel-pascal">
-      <div class="voyageur-header">
-        <span class="voyageur-avatar">🌊</span>
-        <div class="voyageur-info">
-          <h2>Pascal &amp; Marie-Eve</h2>
-          <p>Rome · Palerme · Sicile · Catane</p>
-        </div>
-        <div class="mini-prog">
-          <div class="mini-prog-count" id="count-pascal">0/0</div>
-          <div class="mini-prog-label">items cochés</div>
-        </div>
-      </div>
-
-      <div class="categories" id="cats-pascal">
 
         <div class="categorie open" data-cat="pascal-vêtements">
           <div class="categorie-header" onclick="toggleCat(this)">
@@ -686,6 +667,77 @@
       </div>
 
       <div class="categories" id="cats-suzie">
+
+        <div class="categorie" data-cat="suzie-docs">
+          <div class="categorie-header" onclick="toggleCat(this)">
+            <div class="categorie-titre">
+              <span class="categorie-icon">📄</span>
+              <span class="categorie-nom">Documents &amp; papiers</span>
+            </div>
+            <div class="categorie-meta">
+              <span class="cat-prog"><span class="cat-done">0</span> / <span class="cat-total">0</span></span>
+              <span class="chevron">▼</span>
+            </div>
+          </div>
+          <div class="cat-prog-bar"><div class="cat-prog-fill"></div></div>
+          <div class="categorie-items">
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Passeport</span><span class="item-note">Valide 6 mois après le retour</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Carte d'identité / permis de conduire</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Assurance voyage (numéro de police)</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Carte de crédit / débit (avisé pour l'étranger)</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Euros en espèces</span><span class="item-note">Pour petits achats et pourboires</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Copies des réservations (hébergements, vols)</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Numéros d'urgence (consulat canadien)</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Photo de tous les documents importants (téléphone)</span></div>
+          </div>
+        </div>
+
+        <div class="categorie" data-cat="suzie-elec">
+          <div class="categorie-header" onclick="toggleCat(this)">
+            <div class="categorie-titre">
+              <span class="categorie-icon">🔌</span>
+              <span class="categorie-nom">Électronique &amp; chargeurs</span>
+            </div>
+            <div class="categorie-meta">
+              <span class="cat-prog"><span class="cat-done">0</span> / <span class="cat-total">0</span></span>
+              <span class="chevron">▼</span>
+            </div>
+          </div>
+          <div class="cat-prog-bar"><div class="cat-prog-fill"></div></div>
+          <div class="categorie-items">
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Adaptateur de prise (Europe type C/F)</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Téléphone &amp; chargeur</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Batterie externe (power bank)</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Appareil photo &amp; chargeur</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Carte mémoire(s) supplémentaire(s)</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Écouteurs / AirPods</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Câbles de recharge</span></div>
+          </div>
+        </div>
+
+        <div class="categorie" data-cat="suzie-pratique">
+          <div class="categorie-header" onclick="toggleCat(this)">
+            <div class="categorie-titre">
+              <span class="categorie-icon">🎒</span>
+              <span class="categorie-nom">Articles pratiques</span>
+            </div>
+            <div class="categorie-meta">
+              <span class="cat-prog"><span class="cat-done">0</span> / <span class="cat-total">0</span></span>
+              <span class="chevron">▼</span>
+            </div>
+          </div>
+          <div class="cat-prog-bar"><div class="cat-prog-fill"></div></div>
+          <div class="categorie-items">
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Sacs de compression pour vêtements</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Sacs protecteurs pour bouteilles</span><span class="item-note">Anti-fuite dans les bagages</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Cadenas pour bagages</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Petite trousse à main (avion)</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Sacs Ziploc (liquides avion)</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Étiquettes de bagages</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Oreiller de voyage</span></div>
+            <div class="item" onclick="toggleItem(this)"><div class="item-check"></div><span class="item-label">Masque de nuit &amp; bouchons d'oreilles</span></div>
+          </div>
+        </div>
 
         <div class="categorie open" data-cat="suzie-vêtements">
           <div class="categorie-header" onclick="toggleCat(this)">

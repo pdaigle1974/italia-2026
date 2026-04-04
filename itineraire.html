@@ -460,9 +460,6 @@
 <body>
 
   <script>
-    if (sessionStorage.getItem('italia2026_auth') !== 'ok') {
-      window.location.replace('login.html');
-    }
   </script>
 
   <!-- Navigation -->
@@ -473,7 +470,7 @@
       <li><a href="itineraire.html" class="active">Itinéraire</a></li>
       <li><a href="carte.html">Carte</a></li>
       <li><a href="checklist.html">Bagages</a></li>
-      <li><a href="#">Réservations</a></li>
+      <li><a href="reservations.html">Réservations</a></li>
       <li><a href="#">Budget</a></li>
     </ul>
   </nav>
@@ -1391,9 +1388,6 @@
 
   <script>
     // Protection
-    if (sessionStorage.getItem('italia2026_auth') !== 'ok') {
-      window.location.replace('login.html');
-    }
 
     // Toggle jour
     function toggleJour(header) {

@@ -19,7 +19,7 @@
       <li><a href="itineraire.html">Itinéraire</a></li>
       <li><a href="carte.html">Carte</a></li>
       <li><a href="checklist.html">Bagages</a></li>
-      <li><a href="#">Réservations</a></li>
+      <li><a href="reservations.html">Réservations</a></li>
       <li><a href="#">Budget</a></li>
     </ul>
   </nav>
@@ -120,24 +120,39 @@
       <div class="infos-grid">
         <div class="info-card">
           <div class="info-icon">✈️</div>
-          <h4>Vol aller</h4>
-          <p>Départ le 5 septembre</p>
+          <h4>Vols</h4>
+          <p><strong>Aller · 5 sept</strong><br>TS 402 · YUL 20:25 → FCO 10:25</p>
+          <p><strong>Retour · 19 sept</strong><br>TS 403 · FCO 12:15 → YUL 15:20</p>
         </div>
         <div class="info-card">
           <div class="info-icon">🏨</div>
           <h4>Hébergements</h4>
-          <p>À confirmer</p>
+          <ul>
+            <li>Rome — Via Palermo 49, Monti</li>
+            <li>Palerme — Via Porta Carini, 60 (Pascal &amp; Marie-Eve)</li>
+            <li>Florence — Via Santa Catarina d'Alessandria 15 (Suzie &amp; Patrick)</li>
+            <li>Venise — Campiello Tron 1880, Dorsoduro (Suzie &amp; Patrick)</li>
+            <li>Catane — À choisir ⚠️</li>
+            <li>Naples — Piazza San Gaetano, 81 ✓</li>
+            <li>Rome (retour) — Domus Giulio Guest House</li>
+          </ul>
         </div>
         <div class="info-card">
           <div class="info-icon">🚆</div>
           <h4>Transports</h4>
-          <p>Naples → Rome à réserver</p>
+          <ul>
+            <li>Rome → Florence · TGV (Suzie &amp; Patrick)</li>
+            <li>Rome → Palerme · FR 4906 · FCO 11:15 → PMO 12:20 (8 sept) ✓</li>
+            <li>Palerme → Catane · Train/bus</li>
+            <li>Venise → Catane · Vol Wizz Air</li>
+            <li>Catane → Naples · Vol</li>
+            <li>Naples → Rome · TGV ⚠️ À réserver</li>
+          </ul>
         </div>
         <div class="info-card highlight">
           <div class="info-icon">📋</div>
           <h4>À réserver</h4>
           <ul>
-            <li>Vol Rome → Palerme</li>
             <li>Transport Palerme → Catane</li>
             <li>Train Naples → Rome</li>
           </ul>
@@ -151,10 +166,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-<script>
-  if (sessionStorage.getItem('italia2026_auth') !== 'ok') {
-    window.location.replace('login.html');
-  }
-</script>
 </body>
 </html>
