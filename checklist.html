@@ -408,13 +408,6 @@
 </head>
 <body>
 
-  <!-- Protection mot de passe -->
-  <script>
-    if (sessionStorage.getItem('italia2026_auth') !== 'ok') {
-      window.location.replace('login.html');
-    }
-  </script>
-
   <!-- Navigation -->
   <nav class="nav">
     <a href="index.html" class="nav-logo">🇮🇹 Italia</a>
@@ -852,11 +845,6 @@
   </footer>
 
   <script>
-    // ── Protection ──
-    if (sessionStorage.getItem('italia2026_auth') !== 'ok') {
-      window.location.replace('login.html');
-    }
-
     // ── Clé localStorage ──
     const STORAGE_KEY = 'italia2026_checklist';
 
