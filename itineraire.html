@@ -1419,6 +1419,10 @@
         : 'rgba(26,18,8,0.85)';
     });
   </script>
-
+<script>
+  if (sessionStorage.getItem('italia2026_auth') !== 'ok') {
+    window.location.replace('login.html');
+  }
+</script>
 </body>
 </html>
