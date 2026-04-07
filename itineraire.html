@@ -444,35 +444,96 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* ── Hamburger ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold-light);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Colonnes côte-à-côte (split jour) ── */
+    .split-cols {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .split-cols > div { flex: 1; }
+
     /* ── Responsive ── */
     @media (max-width: 700px) {
       .nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: 0.68rem; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(26,18,8,0.98);
+        border-bottom: 1px solid rgba(201,150,58,0.2);
+        backdrop-filter: blur(12px);
+        padding: 0.5rem 0 1rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 0.8rem 2rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        border-bottom: 1px solid rgba(201,150,58,0.07);
+      }
+      .nav-links li:last-child a { border-bottom: none; }
       .page-header, .legende-bar, .filtres-bar { padding-left: 1.5rem; padding-right: 1.5rem; }
       .main { padding: 2rem 1rem 4rem; }
       .duo-grid { grid-template-columns: 1fr; }
       .vol-principal { grid-template-columns: 1fr; text-align: center; }
       .vol-retour { text-align: center; }
+      .split-cols { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
   <script>
+    function toggleNav(btn) {
+      btn.classList.toggle('open');
+      document.getElementById('nav-links').classList.toggle('open');
+    }
   </script>
 
   <!-- Navigation -->
   <nav class="nav">
     <a href="index.html" class="nav-logo">🇮🇹 Italia</a>
-    <ul class="nav-links">
+    <button class="nav-hamburger" aria-label="Menu" onclick="toggleNav(this)">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Accueil</a></li>
       <li><a href="itineraire.html" class="active">Itinéraire</a></li>
       <li><a href="carte.html">Carte</a></li>
       <li><a href="checklist.html">Bagages</a></li>
       <li><a href="reservations.html">Réservations</a></li>
       <li><a href="ressources.html">Ressources</a></li>
-      <li><a href="#">Budget a venir...</a></li>
+      <li><a href="#">Budget à venir…</a></li>
     </ul>
   </nav>
 
@@ -572,7 +633,7 @@
         </div>
 
         <!-- Séparation PM -->
-        <div style="display:flex; gap:1rem; margin-top:1rem;">
+        <div class="split-cols">
 
           <!-- Pascal & Marie-Eve -->
           <div style="flex:1; background:rgba(232,98,42,0.06); border:1px solid rgba(232,98,42,0.2); border-radius:8px; padding:0.8rem 1rem;">
@@ -652,7 +713,7 @@
       </div>
       <div class="jour-body">
 
-        <div style="display:flex; gap:1rem; margin-top:1rem;">
+        <div class="split-cols">
 
           <!-- Pascal & Marie-Eve -->
           <div style="flex:1; background:rgba(232,98,42,0.06); border:1px solid rgba(232,98,42,0.2); border-radius:8px; padding:0.8rem 1rem;">

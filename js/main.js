@@ -2,6 +2,22 @@
 //  ITALIA 2025 — Script principal
 // ============================================
 
+// --- Menu hamburger ---
+function toggleNav(btn) {
+  btn.classList.toggle('open');
+  document.getElementById('nav-links').classList.toggle('open');
+}
+
+// Ferme le menu si on clique sur un lien
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelector('.nav-hamburger')?.classList.remove('open');
+      document.getElementById('nav-links')?.classList.remove('open');
+    });
+  });
+});
+
 // --- Navigation : fond opaque au scroll ---
 const nav = document.querySelector('.nav');
 

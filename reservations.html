@@ -244,8 +244,55 @@
       border-top: 1px solid var(--cream-dark);
     }
 
+    /* ── Hamburger ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold-light);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     @media (max-width: 640px) {
       .nav { padding: 1rem 1.2rem; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(26,18,8,0.98);
+        border-bottom: 1px solid rgba(201,150,58,0.2);
+        backdrop-filter: blur(12px);
+        padding: 0.5rem 0 1rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 0.8rem 2rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        border-bottom: 1px solid rgba(201,150,58,0.07);
+      }
+      .nav-links li:last-child a { border-bottom: none; }
       .page-header { padding: 2rem 1.2rem 1.5rem; }
       .statuts-bar { padding: 1rem 1.2rem; gap: 1rem; }
       .main-content { padding: 2rem 1rem 3rem; }
@@ -259,14 +306,17 @@
   <!-- Navigation -->
   <nav class="nav">
     <div class="nav-logo">🇮🇹 Italia</div>
-    <ul class="nav-links">
+    <button class="nav-hamburger" aria-label="Menu" onclick="toggleNav(this)">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Accueil</a></li>
       <li><a href="itineraire.html">Itinéraire</a></li>
       <li><a href="carte.html">Carte</a></li>
       <li><a href="checklist.html">Bagages</a></li>
       <li><a href="reservations.html" class="active">Réservations</a></li>
       <li><a href="ressources.html">Ressources</a></li>
-      <li><a href="#">Budget (à venir...)</a></li>
+      <li><a href="#">Budget à venir…</a></li>
     </ul>
   </nav>
 
@@ -528,6 +578,13 @@
   <footer class="footer">
     <p>Italia 2026 · Pascal, Marie-Eve, Suzie &amp; Patrick</p>
   </footer>
+
+  <script>
+    function toggleNav(btn) {
+      btn.classList.toggle('open');
+      document.getElementById('nav-links').classList.toggle('open');
+    }
+  </script>
 
 </body>
 </html>
