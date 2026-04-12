@@ -45,6 +45,7 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
+      padding-top: 68px;
     }
 
     /* ============ NAVIGATION ============ */
@@ -86,9 +87,9 @@
 
     /* ============ PAGE HEADER ============ */
     .page-header {
-      margin-top: 68px;
+      flex-shrink: 0;
       background: var(--dark);
-      padding: 3rem 3rem 2rem;
+      padding: 1.5rem 3rem;
       border-bottom: 1px solid rgba(201, 150, 58, 0.15);
     }
     .page-header h1 {
@@ -121,8 +122,7 @@
     .carte-layout {
       display: flex;
       flex: 1;
-      height: calc(100vh - 68px);
-      min-height: 580px;
+      min-height: 0;
     }
 
     /* ============ PANNEAU LATÉRAL ============ */
@@ -390,10 +390,11 @@
 
     /* ============ FOOTER ============ */
     .footer {
+      flex-shrink: 0;
       background: var(--dark-mid);
       border-top: 1px solid rgba(201, 150, 58, 0.1);
       text-align: center;
-      padding: 1.5rem;
+      padding: 0.8rem;
       font-size: 0.8rem;
       color: rgba(250, 246, 239, 0.35);
       letter-spacing: 0.1em;
@@ -424,7 +425,30 @@
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ============ RESPONSIVE ============ */
+    /* ============ SCROLL WHEEL HINT ============ */
+    .map-scroll-hint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(26, 18, 8, 0.82);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 500;
+      white-space: nowrap;
+    }
+    .map-scroll-hint.visible { opacity: 1; }
+
     @media (max-width: 768px) {
+      body { height: auto; overflow-y: auto; }
       .carte-layout { flex-direction: column; height: auto; }
       .sidebar { width: 100%; max-height: 260px; border-right: none; border-bottom: 1px solid var(--cream-dark); }
       #map { height: 55vh; min-height: 350px; }
@@ -452,7 +476,7 @@
         border-bottom: 1px solid rgba(201,150,58,0.07);
       }
       .nav-links li:last-child a { border-bottom: none; }
-      .page-header { padding: 2rem 1.5rem 1.5rem; }
+      .page-header { padding: 1.2rem 1.5rem; }
       .legende { display: none; }
     }
   </style>
@@ -530,8 +554,9 @@
     </aside>
 
     <!-- Carte -->
-    <div style="position:relative; flex:1;">
+    <div style="position:relative; flex:1; min-width:0;">
       <div id="map"></div>
+      <div class="map-scroll-hint" id="map-scroll-hint">Ctrl + molette pour zoomer</div>
 
       <!-- Légende -->
       <div class="legende">
@@ -881,8 +906,22 @@
   const map = L.map('map', {
     center: [42.5, 13.5],
     zoom: 6,
-    zoomControl: true
+    zoomControl: true,
+    scrollWheelZoom: false
   });
+
+  // Activer le zoom à la molette avec Ctrl, afficher un hint sinon
+  const scrollHint = document.getElementById('map-scroll-hint');
+  let hintTimer;
+  document.getElementById('map').addEventListener('wheel', (e) => {
+    if (!e.ctrlKey) {
+      clearTimeout(hintTimer);
+      scrollHint.classList.add('visible');
+      hintTimer = setTimeout(() => scrollHint.classList.remove('visible'), 1800);
+    }
+  });
+  map.on('focus', () => map.scrollWheelZoom.enable());
+  map.on('blur', () => map.scrollWheelZoom.disable());
 
   // Tuiles OpenStreetMap avec style neutre
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
